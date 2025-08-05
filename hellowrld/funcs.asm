@@ -46,6 +46,21 @@ sprint:
   pop edx,
   ret
 
+; void sprintLF(args: ecx(msg))
+sprintLF:
+  call sprint
+  
+  push ecx      ; push the string to the stack pointer
+  mov ecx, 0Ah  ; set ecx to linefeed
+  push ecx      ; append linefeed to string using the stack
+
+  mov ecx, esp  ; set ecx back to our string
+  call sprint   ; print out our new string
+
+  pop ecx
+  pop ecx
+  ret
+
 ; void exit()
 exit:
   mov ebx, 0
